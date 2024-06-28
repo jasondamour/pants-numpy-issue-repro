@@ -1,0 +1,31 @@
+[GLOBAL]
+pants_version = "2.20.0"
+local_cache = true
+backend_packages = [
+  # Buildfile linting backends
+  "pants.backend.build_files.fmt.black",
+
+  # Python backends
+  "pants.backend.python",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.docformatter",
+  "pants.backend.python.lint.flake8",
+  "pants.backend.python.lint.isort",
+  "pants.backend.python.typecheck.mypy",
+
+  # Docker backends
+  "pants.backend.docker",
+  "pants.backend.docker.lint.hadolint",
+]
+
+[python]
+interpreter_constraints = ["CPython==3.10.6"]
+
+enable_resolves = true
+default_resolve = "test"
+
+[python.resolves]
+test = "test.pants.lock"
+
+[generate-lockfiles]
+diff = true
